@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const auth = require('./routes/auth.js')
+const chat = require('./routes/chat.js')
 
 
 const app = express()
@@ -12,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 
 app.use('/auth', auth)
+app.use('/chat', chat)
 
 
 app.listen(process.env.PORT, () => {

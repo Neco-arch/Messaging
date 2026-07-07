@@ -1,4 +1,3 @@
-require('dotenv').config()
 const express = require('express')
 const { authenticateToken, login, signup } = require('../controller/auth_controller.js')
 
