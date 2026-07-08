@@ -40,27 +40,31 @@ async function createchat(req, res) {
 }
 
 async function findchatid(req, res, next) {
-    const { targetid } = req.body
+    const targetid = parseInt(req.params.chatid)
 
     if (targetid === undefined) {
         res.json("Target id undefined")
     }
 
-    const user = await prisma.user_database.findFirst({
-        where: {
-            username: req.user.username
-        }
-    })
+    try {
+        const user = await prisma.user_database.findFirst({
+            where: {
+                username: req.user.username
+            }
+        })
 
-    const chat = await prisma.chats.findFirst({
-        where: {
-            memberid: [targetid, user.userid]
-        }
-    })
+        const chat = await prisma.chats.findFirst({
+            where: {
+                chatid: targetid
+            }
+        })
 
-    req.chatid = chat.chatid
+        req.chatid = chat.chatid
+        next()
+    } catch (error) {
+        res.json(error)
+    }
 
-    next()
 }
 
 async function readchat(req, res) {
