@@ -77,6 +77,9 @@ async function readchat(req, res) {
     const chathistory = await prisma.chats.findFirst({
         where: {
             chatid: chatid
+        },
+        include: {
+            messages: true
         }
     })
 

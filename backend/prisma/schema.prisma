@@ -27,11 +27,11 @@ model chats {
 }
 
 model message {
-  messageid Int    @id @default(autoincrement())
+  messageid Int      @id @default(autoincrement())
   chatid    Int
-  chat      chats  @relation(fields: [chatid], references: [chatid])
+  chat      chats    @relation(fields: [chatid], references: [chatid])
   content   String
-  date DateTime
+  date      DateTime @default(now())
 
   senderid Int
   sender   user_database @relation(fields: [senderid], references: [userid])
