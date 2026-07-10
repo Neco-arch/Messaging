@@ -53,7 +53,7 @@ async function login(req, res) {
         return res.json("Invalid credentials");
     }
 
-    const token = jwt.sign({ id: finduser.id, username }, process.env.SERCERTKEY, { expiresIn: '7d' });
+    const token = jwt.sign({ id: finduser.userid , username }, process.env.SERCERTKEY, { expiresIn: '7d' });
 
     res.json(token);
 }

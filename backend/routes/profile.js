@@ -3,10 +3,15 @@ const { authenticateToken } = require('../controller/auth_controller.js')
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const cloudinary = require('cloudinary').v2;
 const multer = require('multer');
-const { path } = require('./message.js');
+const path = require('path')
+
+const { ChangeBio, ChangeProfilePicture, ChangeUsername } = require('../controller/profile_controller.js')
 
 const profile = express()
 
+
+
+// Multer and cloudinary Middleware
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
@@ -34,4 +39,17 @@ const upload = multer({
     }
 
 })
+
+// Route
+
+profile.post('/profilepicture', authenticateToken, upload.single('profilepic'), ChangeProfilePicture)
+profile.put('/changeusername', authenticateToken, ChangeUsername)
+profile.put('/changebio', authenticateToken, ChangeBio)
+
+
+module.exports = profile
+
+
+
+
 

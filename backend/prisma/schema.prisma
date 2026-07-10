@@ -16,8 +16,10 @@ model user_database {
   userid   Int    @id @default(autoincrement())
   username String @unique
   password String
+  bio      String?
 
-  messages message[]
+  avatarUrl String?
+  messages  message[]
 }
 
 model chats {

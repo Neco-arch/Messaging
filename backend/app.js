@@ -3,6 +3,7 @@ const express = require('express')
 const auth = require('./routes/auth.js')
 const chat = require('./routes/chat.js')
 const message = require('./routes/message.js')
+const profile = require('./routes/profile.js')
 
 
 const app = express()
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/auth', auth)
 app.use('/chat', chat)
 app.use('/chat', message)
+app.use('/profile', profile)
 
 
 app.listen(process.env.PORT, () => {
