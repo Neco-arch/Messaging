@@ -6,6 +6,6 @@ const chat = express()
 
 chat.post('/create', authenticateToken, createchat)
 
-
+chat.get('/findallchat', authenticateToken, readchat)
 
 module.exports = chat

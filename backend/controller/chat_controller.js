@@ -68,15 +68,13 @@ async function findchatid(req, res, next) {
 }
 
 async function readchat(req, res) {
-    const chatid = req.chatid
-
-    if (chatid === undefined) {
-        res.json("chatid invalid")
-    }
+    const user = req.user
 
     const chathistory = await prisma.chats.findFirst({
         where: {
-            chatid: chatid
+            memberid: {
+                has: user.id
+            }
         },
         include: {
             messages: true

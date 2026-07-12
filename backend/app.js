@@ -4,6 +4,7 @@ const auth = require('./routes/auth.js')
 const chat = require('./routes/chat.js')
 const message = require('./routes/message.js')
 const profile = require('./routes/profile.js')
+const cors = require('cors')
 
 
 const app = express()
@@ -11,6 +12,11 @@ const app = express()
 // Bulit in middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(cors({
+    origin: 'http://localhost:5173'
+}))
+
 
 // Routes
 
