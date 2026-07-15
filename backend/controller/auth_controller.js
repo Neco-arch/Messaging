@@ -71,4 +71,15 @@ async function authenticateToken(req, res, next) {
     });
 };
 
-module.exports = { authenticateToken, signup, login }
+async function DecyrptToken(req, res) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+    if (!token) return res.sendStatus(401);
+
+    jwt.verify(token, process.env.SERCERTKEY, (err, user) => {
+        if (err) return res.sendStatus(403);
+        res.json(user)
+    });
+}
+
+module.exports = { authenticateToken, signup, login, DecyrptToken }

@@ -1,9 +1,7 @@
 const { prisma } = require("../lib/prisma.js");
 const jwt = require("jsonwebtoken");
 
-function finduserprofile() {
-    const { } = req.body
-}
+
 
 
 function extractPublicId(url) {
@@ -157,4 +155,4 @@ async function ChangeBio(req, res) {
     }
 }
 
-module.exports = { ChangeUsername, ChangeProfilePicture, ChangeBio, finduserprofile };
+module.exports = { ChangeUsername, ChangeProfilePicture, ChangeBio };

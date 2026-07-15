@@ -6,7 +6,7 @@ import axios from "axios";
 import Sidebar from "./components/chats_sidebar";
 
 export default function App_page() {
-    const [chatdata , savechatdata] = useState([])
+    const [chatdata , savechatdata] = useState()
     const save_token = useToken((state) => state.token);
     const auth = useUserauth((state) => state.auth);
 
@@ -18,8 +18,8 @@ export default function App_page() {
 
     const getallchathistory = async() => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${save_token}`;
-        const result = axios.get("http://localhost:3000/chat/findallchat")
-        return result
+        const result = await axios.get("http://localhost:3000/chat/findallchat")
+        return result.data
     }
 
     return(<>

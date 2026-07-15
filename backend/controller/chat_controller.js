@@ -69,8 +69,7 @@ async function findchatid(req, res, next) {
 
 async function readchat(req, res) {
     const user = req.user
-
-    const chathistory = await prisma.chats.findFirst({
+    const chathistory = await prisma.chats.findMany({
         where: {
             memberid: {
                 has: user.id
