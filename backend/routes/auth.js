@@ -5,10 +5,8 @@ const auth = express()
 
 auth.use(express.json())
 
-auth.post('/login', signup)
+auth.post('/login', login)
 
 auth.post('/signup', signup, login)
-
-auth.get('/decyptToken', DecyrptToken)
 
 module.exports = auth

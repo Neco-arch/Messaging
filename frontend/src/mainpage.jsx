@@ -1,32 +1,28 @@
-import {  useEffect , useState } from "react";
-import Signup from "./signup";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+
+import { useNavigate } from "react-router-dom";
+
 import useUserauth from "./global/userauth";
 import useToken from "./global/token";
-import axios from "axios";
-import Sidebar from "./components/chats_sidebar";
+
+import Sidebar from "./components/sidebar";
 
 export default function App_page() {
-    const [chatdata , savechatdata] = useState()
+    const navigate = useNavigate();
+    const [chatdata, savechatdata] = useState()
     const save_token = useToken((state) => state.token);
     const auth = useUserauth((state) => state.auth);
 
+    const auth_false = useUserauth((state) => state.auth_false);
+
     useEffect(() => {
-        getallchathistory().then((res) => {
-            savechatdata(res)
-        })
-    },[])
-
-    const getallchathistory = async() => {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${save_token}`;
-        const result = await axios.get("http://localhost:3000/chat/findallchat")
-        return result.data
-    }
-
-    return(<>
-    <div>
-        <Sidebar chathistory={chatdata}></Sidebar>
-    </div>
-    </>)
-
+        const decode = jwtDecode(save_token)
+        if (Date.now() > decode.exp * 1000) {
+            auth_false()
+            navigate("/login");
+        }
+    }, [])
 
 }

@@ -5,7 +5,6 @@ const { createmessage, deletemessage, editmessage } = require('../controller/cru
 
 const message = express()
 
-message.get('/:chatid', authenticateToken, findchatid, readchat)
 
 message.post('/:chatid', authenticateToken, findchatid, createmessage)
 
